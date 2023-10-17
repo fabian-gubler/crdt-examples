@@ -17,7 +17,19 @@ class GCounter:
         return sum(self.counts.values())
 
     def merge(self, other):
-        """Merge another GCounter into this one."""
-        for node, count in other.counts.items():
+        """Merge another GCounter or its state into this one."""
+        other_counts = other
+        if isinstance(other, GCounter):
+            other_counts = other.counts
+
+        for node, count in other_counts.items():
             self.counts[node] = max(self.counts.get(node, 0), count)
-        self.version_vector.update(other.version_vector)
+        # If `other` is a GCounter object, update the version vector.
+        if isinstance(other, GCounter):
+            self.version_vector.update(other.version_vector)
+
+    def get_state(self):
+        return self.counts
+
+    def get(self):
+        return self.counts

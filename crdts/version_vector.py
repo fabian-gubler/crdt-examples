@@ -18,3 +18,6 @@ class VersionVector:
             if self.vector.get(node, 0) <= clock:
                 return False
         return True
+
+    def get_state(self):
+        return self.vector

@@ -21,3 +21,9 @@ class PNCounter:
         """Merge another PNCounter into this one."""
         self.p_counter.merge(other.p_counter)
         self.n_counter.merge(other.n_counter)
+
+    def get_state(self):
+        return self.p_counter.value() - self.n_counter.value()
+
+    def get(self):
+        return self.p_counter.value() - self.n_counter.value()
